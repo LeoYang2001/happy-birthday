@@ -103,7 +103,7 @@ export default function MainPage({
       className="main-page  flex flex-col   overflow-hidden"
     >
       <div
-        className="  absolute animate-shake  w-28 h-16"
+        className="  absolute   w-28 h-16"
         style={{
           backgroundImage: `url(${foxWallpaper})`,
           backgroundSize: "50%",
