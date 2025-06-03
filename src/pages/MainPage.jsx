@@ -12,6 +12,7 @@ import postcardsData from "../postcards.json";
 import PostCard from "../components/PostCard";
 import { useLocation } from "react-router-dom";
 import config from "../configuration.json";
+import { ArrowDown } from "lucide-react";
 
 const postcards = postcardsData.map((card) => ({
   ...card,
@@ -19,6 +20,7 @@ const postcards = postcardsData.map((card) => ({
 }));
 
 const SCREEN_WIDTH = window.screen.width;
+
 const SCROLL_OFFSET = 0;
 
 export default function MainPage({
@@ -28,7 +30,8 @@ export default function MainPage({
   startTyping,
 }) {
   const [typedGreeting, setTypedGreeting] = useState("");
-
+   const [showBtn, setShowBtn] = useState(false)
+  const [hasClicked, setHasClicked] = useState(false)
   useEffect(() => {
     if (!startTyping) return;
     const fullMessage = config.greetingMessage;
@@ -46,6 +49,8 @@ export default function MainPage({
           return next;
         } else {
           clearInterval(interval);
+          setShowBtn(true)
+
           return prev;
         }
       });
@@ -64,6 +69,7 @@ export default function MainPage({
   const initialIndex = location.state?.index || 0;
 
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+ 
 
   useEffect(() => {
     controls.start({
@@ -97,7 +103,7 @@ export default function MainPage({
       className="main-page  flex flex-col   overflow-hidden"
     >
       <div
-        className="  absolute  w-28 h-16"
+        className="  absolute animate-shake  w-28 h-16"
         style={{
           backgroundImage: `url(${foxWallpaper})`,
           backgroundSize: "50%",
@@ -122,8 +128,25 @@ export default function MainPage({
         </p>
         <p className=" text-lg  text-black mt-10 opacity-80">{typedGreeting}</p>
 
-        <h2 className="page-title mt-auto  px-2 py-1 font-semibold opacity-60 rounded-full flex flex-row items-center">
-          <div className="flex justify-center mt-4 space-x-2">
+            <h2 className="page-title relative w-full   justify-center mt-auto  px-2 py-1 font-semibold opacity-60 rounded-full flex flex-row items-center">
+            {
+              !hasClicked && (
+                <div style={{
+                  opacity: showBtn ? 1: 0,
+                  transition:"all 1s linear"
+                }} className="absolute   flex justify-center -top-8 w-full">
+               <div className="animate-shake flex items-center bg-white px-2 rounded-full">
+                <ArrowDown size={14} className=" mr-1" />
+                {
+                `click postcards below`
+                }
+                 
+               </div>
+              </div>
+              )
+            }
+          <div className="flex  justify-center mt-4 space-x-2">
+           
             {postcards.map((_, idx) => (
               <div
                 key={idx}

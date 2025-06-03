@@ -32,7 +32,7 @@ export default function ExpandableVideoPlayer({
     setTimeout(() => {
       setIsExpanded(false);
       setStartTyping(true);
-    }, 2000);
+    }, 5000);
   };
 
   useEffect(() => {
