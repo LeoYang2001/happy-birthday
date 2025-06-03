@@ -19,7 +19,7 @@ export default function App() {
           height: isExpanded ? "100dvh" : 80,
           transition: " all 0.2s linear",
         }}
-        className="absolute right-0 top-0  "
+        className={`absolute right-0 top-0 ${!isExpanded && (`animate-shakePause`)}`}
       >
         <ExpandableVideoPlayer
           isExpanded={isExpanded}
