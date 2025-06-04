@@ -12,6 +12,19 @@ let sessionActive = false;
 let sessionStartTime = null;
 export let timeStampPin = null;
 let lastPageName = null;
+let userIP = null;
+
+
+// Get IP on load
+fetch("https://api.ipify.org?format=json")
+  .then((res) => res.json())
+  .then((data) => {
+    userIP = data.ip;
+    // console.log(`🌐 IP address: ${userIP}`);
+  })
+  .catch(() => {
+    userIP = "unknown-ip";
+  });
 
 
 
@@ -29,7 +42,6 @@ export function startSessionIfNeeded() {
     sessionActive = true;
   }
 }
-
 export async function endSessionIfNeeded() {
   if (sessionActive && sessionStartTime) {
     const endTime = new Date();
@@ -41,11 +53,15 @@ export async function endSessionIfNeeded() {
 
     sessionActive = false;
 
-    const sessionId = uuidv4();
+    const sessionId = `${Date.now()}-${uuidv4()}`;
+    const userId = userIP || "unknown-ip";
+
     try {
-      await setDoc(doc(db, "sessions", sessionId), {
+      const sessionRef = doc(db, "sessions", userId, "logs", sessionId);
+      await setDoc(sessionRef, {
         sessionId,
-        startedAt: sessionStartTime.toISOString(), // ✅ access before resetting
+        ip: userIP,
+        startedAt: sessionStartTime.toISOString(),
         endedAt: endTime.toISOString(),
         durationSec,
         footprints,
@@ -54,7 +70,7 @@ export async function endSessionIfNeeded() {
       console.error("❌ Failed to save footprints to Firebase:", error);
     }
 
-    sessionStartTime = null; // ✅ now it's safe to reset
+    sessionStartTime = null;
   }
 }
 
