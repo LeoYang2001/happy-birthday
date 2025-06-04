@@ -14,6 +14,12 @@ export default function ExpandableVideoPlayer({
   const videoRef = useRef(null);
 
   useEffect(() => {
+    console.log('video isExpanded:', isExpanded)
+  }, [isExpanded])
+  
+
+  //User behavior tracking
+  useEffect(() => {
   if (isExpanded) {
     startVideoWatch();
   } else {
@@ -22,16 +28,17 @@ export default function ExpandableVideoPlayer({
 }, [isExpanded]);
 
 
-  const handleToggle = () => {
+  const handleToggle = (e) => {
+    e.stopPropagation()
+    console.log('toggle clicked')
+      setIsExpanded(!isExpanded);
+
     if (!hasTyped) {
       setHasStarted(true);
       setIsMuted(false);
-      setTimeout(() => {
-        setIsExpanded(false);
-        setStartTyping(true);
-      }, 2000);
+    
+   
     } else {
-      setIsExpanded(!isExpanded);
     }
   };
 
@@ -70,6 +77,7 @@ export default function ExpandableVideoPlayer({
 
         <video
           ref={videoRef}
+          autoPlay={false}
           playsInline
           src={require("../assets/piano.mp4")}
           className={`w-full h-full ${
@@ -79,12 +87,17 @@ export default function ExpandableVideoPlayer({
           style={{
             opacity: isExpanded ? 1 : 0,
           }}
+
+          onPlaying={(e)=>{
+            console.log('video fully loaded')
+            handleStart(e)
+          }}
           muted={isMuted}
         />
 
         {!hasStarted && isExpanded && (
           <button
-            onClick={handleStart}
+             onClick={handleStart}
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-white text-black rounded-full p-4 shadow-lg"
           >
             <Play className="w-6 h-6" />
@@ -96,8 +109,8 @@ export default function ExpandableVideoPlayer({
             onClick={(e) => {
               e.stopPropagation();
                const newMuted = !isMuted;
-    setIsMuted(newMuted);
-    recordMuteToggle(newMuted);
+                setIsMuted(newMuted);
+                recordMuteToggle(newMuted);
             }}
             className="absolute top-4 right-4 z-20 bg-white rounded-full px-3 py-1 text-sm font-semibold"
           >
