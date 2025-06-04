@@ -78,15 +78,15 @@ function ExpandableVideoPlayer_improve({
             
                 className=' rounded-3xl relative overflow-hidden p-4  shadow-md mt-10'
             >
-                {
+                {/* {
                     !videoReady && (
                         <div className=' w-full h-full absolute left-0 top-0 flex justify-center items-center'>
                             Loading Video...
                         </div>
                     )
-                }
+                } */}
                 <video
-                onCanPlayThrough={
+                onPlaying={
                     ()=>{
                         setVideoReady(true)
                     }
