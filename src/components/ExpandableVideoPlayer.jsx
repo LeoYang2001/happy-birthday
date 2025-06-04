@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Piano, Play } from "lucide-react";
+import { endVideoWatch, pinTimestamp, recordMuteToggle, startVideoWatch } from "../simpleTracker";
 
 export default function ExpandableVideoPlayer({
   isExpanded,
@@ -11,6 +12,15 @@ export default function ExpandableVideoPlayer({
   const [isMuted, setIsMuted] = useState(true);
   const [hasStarted, setHasStarted] = useState(false);
   const videoRef = useRef(null);
+
+  useEffect(() => {
+  if (isExpanded) {
+    startVideoWatch();
+  } else {
+    endVideoWatch();
+  }
+}, [isExpanded]);
+
 
   const handleToggle = () => {
     if (!hasTyped) {
@@ -24,6 +34,8 @@ export default function ExpandableVideoPlayer({
       setIsExpanded(!isExpanded);
     }
   };
+
+ 
 
   const handleStart = (e) => {
     e.stopPropagation();
@@ -83,7 +95,9 @@ export default function ExpandableVideoPlayer({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              setIsMuted((prev) => !prev);
+               const newMuted = !isMuted;
+    setIsMuted(newMuted);
+    recordMuteToggle(newMuted);
             }}
             className="absolute top-4 right-4 z-20 bg-white rounded-full px-3 py-1 text-sm font-semibold"
           >

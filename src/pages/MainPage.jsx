@@ -13,6 +13,7 @@ import PostCard from "../components/PostCard";
 import { useLocation } from "react-router-dom";
 import config from "../configuration.json";
 import { ArrowDown } from "lucide-react";
+import { pinTimestamp } from "../simpleTracker";
 
 const postcards = postcardsData.map((card) => ({
   ...card,
@@ -32,6 +33,15 @@ export default function MainPage({
   const [typedGreeting, setTypedGreeting] = useState("");
    const [showBtn, setShowBtn] = useState(false)
   const [hasClicked, setHasClicked] = useState(false)
+
+
+  useEffect(() => {
+    pinTimestamp("Main Page");
+  }, []);
+
+  
+
+
   useEffect(() => {
     if (!startTyping) return;
     const fullMessage = config.greetingMessage;
@@ -188,12 +198,15 @@ export default function MainPage({
                     key={card.id}
                     layoutId={`card-${card.id}`}
                     className="postcard-card   flex flex-col  px-4 py-4 pb-24"
-                    onClick={() => openCard(card.id, index)}
+                    onClick={() => {
+                      openCard(card.id, index)
+                      setHasClicked(true)
+                    }}
                     whileTap={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     style={{ width: "90vw", flexShrink: 0 }}
                   >
-                    <PostCard card={card} />
+                    <PostCard  card={card} />
                   </motion.div>
                 ))}
               </motion.div>

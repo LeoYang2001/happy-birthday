@@ -1,11 +1,12 @@
 // LetterPage.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import postcardsData from "../postcards.json";
 import { ChevronLeft } from "lucide-react";
 import config from "../configuration.json";
+import { pinTimestamp, recordImageZoom } from "../simpleTracker";
 
 const postcards = postcardsData.map((card) => ({
   ...card,
@@ -19,6 +20,12 @@ export default function LetterPage() {
   const card = postcards.find((c) => c.id === id);
   const [dragY, setDragY] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
+
+
+  
+    useEffect(() => {
+      pinTimestamp(`Letter Page: ${id}`);
+    }, []);
 
   if (!card) return <p>Card not found</p>;
 
@@ -36,7 +43,12 @@ export default function LetterPage() {
           alt={card.title}
           layoutId={`card-${card.id}`}
           className="w-[100%] h-[30vh] object-cover rounded-t-2xl shadow-lg cursor-pointer"
-          onClick={() => setIsExpanded(true)}
+          onClick={() => 
+            {
+              setIsExpanded(true)
+              recordImageZoom(card.title)
+            } // ✅ log the image zoom
+          }
           drag="y"
           dragConstraints={{ top: -10, bottom: 10 }}
           dragElastic={0.1}
