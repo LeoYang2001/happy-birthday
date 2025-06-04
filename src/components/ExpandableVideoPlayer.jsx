@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Piano, Play } from "lucide-react";
 import { endVideoWatch, pinTimestamp, recordMuteToggle, startVideoWatch } from "../simpleTracker";
+import config from "../configuration.json";
+
 
 export default function ExpandableVideoPlayer({
   isExpanded,
@@ -12,10 +14,11 @@ export default function ExpandableVideoPlayer({
   const [isMuted, setIsMuted] = useState(true);
   const [hasStarted, setHasStarted] = useState(false);
   const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false)
 
   useEffect(() => {
-    console.log('video isExpanded:', isExpanded)
-  }, [isExpanded])
+    console.log('video isplaying:', isPlaying)
+  }, [isPlaying])
   
 
   //User behavior tracking
@@ -81,22 +84,28 @@ export default function ExpandableVideoPlayer({
           playsInline
           src={require("../assets/piano.mp4")}
           className={`w-full h-full ${
-            isExpanded ? "object-contain bg-black" : "object-cover"
+            isExpanded ? "object-contain" : "object-cover"
           }`}
+          style={isExpanded ? {
+            backgroundColor:  config.themeColor
+          }:{}}
           loop
-          style={{
-            opacity: isExpanded ? 1 : 0,
-          }}
-
+          // style={{
+          //   opacity: isExpanded ? 1 : 0,
+          // }}
+          
           onPlaying={(e)=>{
             console.log('video fully loaded')
-            alert('video fully loaded')
+           setIsPlaying(true)
             handleStart(e)
+          }}
+          onPause={(e)=>{
+           setIsPlaying(false)
           }}
           muted={isMuted}
         />
 
-        {!hasStarted && isExpanded && (
+        { ((!hasStarted && isExpanded) || (!isPlaying && isExpanded)) && (
           <button
              onClick={handleStart}
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-white text-black rounded-full p-4 shadow-lg"

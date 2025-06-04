@@ -5,6 +5,7 @@ import MainPage from "./pages/MainPage";
 import LetterPage from "./pages/LetterPage";
 import ExpandableVideoPlayer from "./components/ExpandableVideoPlayer";
 import { endSessionIfNeeded, pinTimestamp, startSessionIfNeeded } from "./simpleTracker";
+import ExpandableVideoPlayer_improve from "./components/ExpandableVideoPlayer_improve";
 
 export default function App() {
   const [hasTyped, setHasTyped] = useState(false);
@@ -42,7 +43,34 @@ useEffect(() => {
 
   return (
     <div className="w-[100vw] h-[100dvh]  overflow-hidden">
+       {/* MASK  */}
+        <div onClick={()=>{
+            setIsExpanded(false)
+        }} style={{
+            backgroundColor:"#000",
+            opacity:isExpanded ? (hasTyped ? 0.7 : 0.9) : 0,
+            zIndex: isExpanded ? 300 : 0,
+            transition:'all .2s linear'
+        }} className=' w-full  h-full absolute flex  justify-center items-center '>
+          {!hasTyped && (
+            <div className="animate-shake text-white text-xl">
+              Click Play Button To Start
+            </div>
+          )}
+        </div>
       <div
+        className={`absolute ${isExpanded ? 'right-0':'right-2'} top-0 overflow-hidden   `}
+        onClick={()=>{
+          if(!isExpanded) setIsExpanded(true)
+        }}
+       style={{
+          zIndex: 999,
+          width: isExpanded ? "100dvw": 40,
+          transition:'all .2s linear'
+        }}>
+          <ExpandableVideoPlayer_improve hasTyped={hasTyped} setStartTyping={setStartTyping} isExpanded={isExpanded}  setIsExpanded={setIsExpanded} />
+      </div>
+      {/* <div
         style={{
           zIndex: 999,
           width: isExpanded ? "100vw" : 80,
@@ -57,7 +85,7 @@ useEffect(() => {
           setStartTyping={setStartTyping}
           hasTyped={hasTyped}
         />
-      </div>
+      </div> */}
       <Router>
         <Routes>
           <Route
