@@ -90,6 +90,7 @@ export default function ExpandableVideoPlayer({
 
           onPlaying={(e)=>{
             console.log('video fully loaded')
+            alert('video fully loaded')
             handleStart(e)
           }}
           muted={isMuted}
