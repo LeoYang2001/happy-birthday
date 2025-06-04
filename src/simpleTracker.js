@@ -26,7 +26,6 @@ export function startSessionIfNeeded() {
     sessionStartTime = new Date();
     const msg = `🟢 Session started at ${getTimeString(sessionStartTime)}`;
     footprints.push(msg);
-    console.log(msg);
     sessionActive = true;
   }
 }
@@ -39,7 +38,6 @@ export async function endSessionIfNeeded() {
 
     const msg = `🔴 Session ended at ${getTimeString(endTime)} (duration: ${durationSec}s)`;
     footprints.push(msg);
-    console.log(msg);
 
     sessionActive = false;
 
@@ -52,7 +50,6 @@ export async function endSessionIfNeeded() {
         durationSec,
         footprints,
       });
-      console.log(`✅ Session footprints uploaded to Firebase [${sessionId}]`);
     } catch (error) {
       console.error("❌ Failed to save footprints to Firebase:", error);
     }
@@ -82,7 +79,6 @@ export function pinTimestamp(newPageName) {
     const durationSec = Math.round(durationMs / 1000);
     const msg = `📄 Page "${lastPageName}" ended — duration: ${durationSec}s`;
     footprints.push(msg);
-    console.log(msg);
   }
 
   timeStampPin = now;
@@ -90,7 +86,6 @@ export function pinTimestamp(newPageName) {
 
   const msg = `📍 Page "${newPageName}" started at ${getTimeString(timeStampPin)}`;
   footprints.push(msg);
-  console.log(msg);
 }
 
 
@@ -101,7 +96,6 @@ export function startVideoWatch() {
     videoStartTime = new Date();
     const msg = `🎬 Video opened at ${getTimeString(videoStartTime)}`;
     footprints.push(msg);
-    console.log(msg);
   }
 }
 
@@ -111,7 +105,6 @@ export function endVideoWatch() {
     const durationSec = Math.round((now - videoStartTime) / 1000);
     const msg = `🛑 Video closed — duration: ${durationSec}s`;
     footprints.push(msg);
-    console.log(msg);
     videoStartTime = null;
   }
 }
@@ -120,12 +113,10 @@ export function endVideoWatch() {
 export function recordImageZoom(imageTitle) {
   const msg = `🔍 User zoomed in on image: "${imageTitle}" at ${getTimeString()}`;
   footprints.push(msg);
-  console.log(msg);
 }
 
 
 export function recordMuteToggle(isMuted) {
   const msg = `🔇 Mute toggled: ${isMuted ? "Muted" : "Unmuted"} at ${getTimeString()}`;
   footprints.push(msg);
-  console.log(msg);
 }
