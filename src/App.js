@@ -13,26 +13,32 @@ export default function App() {
 
   
 
-  useEffect(() => {
-    // Start a session as soon as app loads
-    startSessionIfNeeded();
+useEffect(() => {
+  // Start a session when the app becomes visible
+  startSessionIfNeeded();
 
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "hidden") {
-        endSessionIfNeeded();
-      } else if (document.visibilityState === "visible") {
-        startSessionIfNeeded();
-      }
-    };
+  const handleVisibilityChange = () => {
+    if (document.visibilityState === "hidden") {
+      endSessionIfNeeded();
+    } else if (document.visibilityState === "visible") {
+      startSessionIfNeeded();
+    }
+  };
 
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("beforeunload", endSessionIfNeeded);
+  const handlePageHide = () => {
+    endSessionIfNeeded(); // Works better on Safari/iOS
+  };
 
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("beforeunload", endSessionIfNeeded);
-    };
-  }, []);
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+  window.addEventListener("pagehide", handlePageHide, { capture: true });
+
+  return () => {
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
+    window.removeEventListener("pagehide", handlePageHide, { capture: true });
+  };
+}, []);
+
+  
 
   return (
     <div className="w-[100vw] h-[100dvh]  overflow-hidden">
