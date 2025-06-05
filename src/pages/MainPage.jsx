@@ -136,7 +136,7 @@ export default function MainPage({
         >
           For {config.recipient}
         </p>
-        <p className=" text-lg  text-black mt-10 opacity-80">{typedGreeting}</p>
+        <p className=" text-lg  text-black mt-6 opacity-80">{typedGreeting}</p>
 
             <h2 className="page-title relative w-full   justify-center mt-auto  px-2 py-1 font-semibold opacity-60 rounded-full flex flex-row items-center">
             {
@@ -144,7 +144,7 @@ export default function MainPage({
                 <div style={{
                   opacity: showBtn ? 1: 0,
                   transition:"all 1s linear"
-                }} className="absolute   flex justify-center -top-8 w-full">
+                }} className="absolute   flex justify-center -top-3 w-full">
                <div className="animate-shake flex items-center bg-white px-2 rounded-full">
                 <ArrowDown size={14} className=" mr-1" />
                 {

@@ -5,7 +5,7 @@ import { db } from "./firebase";
 
 function getTimeString(date = new Date()) {
   const pad = (n) => String(n).padStart(2, "0");
-  return `${pad(date.getDate())}-${pad(date.getMonth() + 1)}-${date.getFullYear()} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+  return `${pad(date.getMonth() + 1)}-${pad(date.getDate())}-${date.getFullYear()} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
 }
 
 let sessionActive = false;
@@ -134,5 +134,10 @@ export function recordImageZoom(imageTitle) {
 
 export function recordMuteToggle(isMuted) {
   const msg = `🔇 Mute toggled: ${isMuted ? "Muted" : "Unmuted"} at ${getTimeString()}`;
+  footprints.push(msg);
+}
+
+export function videoPlayingToggle(isPlaying) {
+  const msg = `🔇 Video toggled: ${isPlaying ? "Playing" : "Pause"} at ${getTimeString()}`;
   footprints.push(msg);
 }

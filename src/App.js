@@ -12,6 +12,33 @@ export default function App() {
   const [isExpanded, setIsExpanded] = useState(true);
   const [startTyping, setStartTyping] = useState(false);
 
+  const introMsg = [
+    'Happy Birthday Renee!',
+    'This is a little gift I have made for you',
+    'Click the play button to begin',
+    'Hope you will enjoy this!'
+  ]
+
+  const [introMsgIndex, setIntroMsgIndex] = useState(0)
+
+ useEffect(() => {
+  if (hasTyped) return;
+
+  const interval = setInterval(() => {
+    setIntroMsgIndex(prev => {
+      if (prev < introMsg.length - 1) {
+        return prev + 1;
+      } else {
+        clearInterval(interval); // Stop when done
+        return prev;
+      }
+    });
+  }, 2000);
+
+  return () => clearInterval(interval); // Cleanup on unmount
+}, [hasTyped]);
+  
+
   
 
 useEffect(() => {
@@ -45,7 +72,9 @@ useEffect(() => {
     <div className="w-[100vw] h-[100dvh]  overflow-hidden">
        {/* MASK  */}
         <div onClick={()=>{
-            setIsExpanded(false)
+            if(hasTyped){
+              setIsExpanded(false)
+            }
         }} style={{
             backgroundColor:"#000",
             opacity:isExpanded ? (hasTyped ? 0.7 : 0.9) : 0,
@@ -53,8 +82,17 @@ useEffect(() => {
             transition:'all .2s linear'
         }} className=' w-full  h-full absolute flex  justify-center items-center '>
           {!hasTyped && (
-            <div className="animate-shake text-white text-xl">
-              Click Play Button To Start
+            <div className="animate-shake w-full justify-center items-center text-white text-xl">
+              {
+                introMsg.map((msg, index)=>(
+                  <p key={index}
+                  className="absolute w-full flex justify-center items-center px-6"
+                  style={{
+                    transition:'all .5s linear',
+                    opacity: index === introMsgIndex ? 1 : 0
+                  }} >{msg}</p>
+                ))
+              }
             </div>
           )}
         </div>

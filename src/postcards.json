@@ -4,34 +4,34 @@
     "title": "Life in New York",
     "description": "Living Freely",
     "image": "card1.png",
-    "message": "Renee,\nYou told me once that you want to move to a big city, because you love the unpredictability and chaos that comes with it. But I know you’re hesitant, partly because your parents don’t want you too far away. And I get it! you’ve always wanted to be a good daughter. But that doesn’t mean you have to put your own dreams on hold. You deserve to live the life you want, not the one anyone else picked for you. So go chase that city energy. If you miss home, fly back, visit more, make it work. It might take a bit more time and effort to travel from New York to Huntsville, but it’s worth it if you’re living a story that’s actually yours. Bring the warmth back with you when you do."
+    "message": "Renee,\nYou told me once that you want to move to a big city, because you love the unpredictability and chaos that comes with it. But I know you're hesitant, partially because your parents don't want you too far away. And I get it! you've always are a good daughter. But that doesn't mean you have to put your own dreams on hold. You deserve to live the life you want, not the one anyone else picked for you. So go chase that city energy. If you miss home, fly back, visit more, make it work. It might take a bit more time and effort to travel from New York to Huntsville, but it's worth it if you're living a story that's actually yours. Bring the warmth back with you when you do."
   },
   {
     "id": "2",
-    "title": "Cybersecurity Dream",
-    "description": "Chase Your Dream",
+    "title": "Chase Your Dream",
+    "description": "Cybersecurity Or Anything Else",
     "image": "card2.png",
-    "message": "Renee,\nNobody’s got it all figured out—we’re all just kind of winging it. I know you’ve been curious about cybersecurity, and honestly, I’d love to see you dive into it.\nYou told me once how your major wasn’t really your thing, and I remember thinking, “She deserves better than just okay.” Whether it’s tech, music, or something totally random, I just hope you chase what actually lights you up.\nAnd hey—knowing that you kind of want to learn programming because of me? That’s probably the best compliment I’ve gotten all year. So seriously, hit me up for a coding lesson anytime.\nForget expectations—you’re way too cool to follow someone else’s blueprint."
+    "message": "Renee,\nNobody's got it all figured out, we're all just kind of winging it. I know you've been curious about cybersecurity, and honestly, I'd love to see you start trying it.\nYou told me how your major wasn't really your thing, and I remember thinking, “She deserves better than just okay.” Whether it's tech, or something totally random, I just hope you chase what actually lights you up.\nAnd hey, knowing that you are kind of more interested in programming because of me? That's probably the best compliment I've gotten all year. So seriously, hit me up for a coding lesson anytime.\nForget expectations, it's your own life to build."
   },
   {
     "id": "3",
     "title": "Rock On",
-    "description": "The Music Is Yours",
+    "description": "You'b be so COOL with afro",
     "image": "card3.png",
-    "message": "Renee,\nI still remember your mom proudly showing me videos of you playing piano and violin on stage. But I get it—you lost interest after being pushed too hard.\nAnd yet, you still light up when you talk about learning guitar or drums.\nThat right there? That’s the spark.\nI can totally picture you jamming out after class—or even on a small stage somewhere, repping your favorite band tee and just doing your thing.\nDo it for you this time. Loud. Messy. Free. That’s where the fun lives."
+    "message": "Renee,\nI still remember your mom proudly showing me videos of you playing piano and violin on stage. But I get it, you lost interest after being pushed too hard.\nAnd yet, you still light up when you talk about learning guitar or drums.\nThat right there? That's the spark.\nI can totally picture you jamming out after class, or even on a small stage somewhere, repping your favorite band tee and just doing your thing.\nDo it for you this time. Loud. Messy. Free."
   },
   {
     "id": "4",
-    "title": "Liberty Wind",
-    "description": "Let Go, Look Up",
+    "title": "Let Go, Look Up",
+    "description": "You Are More Beautiful Than You Think",
     "image": "card4.png",
-    "message": "Renee,\nYou remember that windy cruise in New York, right? You were so busy holding your bangs in place that you almost missed the skyline. And I’m being serious when I said I liked your forehead 😆\nHonestly though? That was one of my favorite moments. Because even when you’re caught off guard, you shine.\nSo next time, let your hair fly. Be in the moment. You’re already beautiful—probably more than you give yourself credit for."
+    "message": "Renee,\nYou remember that windy cruise in New York, right? You were way too busy holding your bangs in place to fully enjoy the beautiful scene. And I was being serious when I said I liked your forehead 😆\nHonestly though? That was one of my favorite moments. Because even when you're caught off guard, you shine.\nSo next time, let your hair fly. Be in the moment. You're already beautiful, probably more than you give yourself credit for."
   },
   {
     "id": "5",
     "title": "Speak Up, Sweetheart",
-    "description": "You’re allowed to want the original Coke. And a nap.",
+    "description": "You're Allowed To Want The ORIGINAL Coke. And A Nap.",
     "image": "card5.png",
-    "message": "Renee,\nTwice. You ordered an original Coke and got Diet Coke instead, and both times you just smiled and said “It’s fine” before I could even say anything.\nAnd don’t even get me started on when you said you were sleepy, but still went along with the group like, “Yep! Totally awake!” 😅\nYou’ve got this huge heart, and I admire that. But you don’t have to say yes to everything just to keep the peace. Your voice matters too. You deserve to get exactly what you want—whether it’s the right drink or just a break when you’re tired.\n—Leo"
+    "message": "Renee,\nNot sure if you remembered exactly but Twice. You ordered an original Coke and got Diet Coke instead, and both times you just smiled and said “It's fine” before I could even say anything.\nAnd don't even get me started on when you said you were sleepy, but still went along with the group like, “Yep! Totally awake!” 😅\nYou've got this huge heart, and I admire that. But you don't have to say yes to everything just to keep the peace. Your voice matters too. You deserve to get exactly what you want, whether it's the right drink or just a break when you're tired.\n"
   }
 ]

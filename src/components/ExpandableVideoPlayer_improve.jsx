@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import config from "../configuration.json";
 import { Pause, Piano, Play } from 'lucide-react';
-import { endVideoWatch, startVideoWatch } from '../simpleTracker';
+import { endVideoWatch, recordMuteToggle, startVideoWatch, videoPlayingToggle } from '../simpleTracker';
 
 function ExpandableVideoPlayer_improve({
     isExpanded,
@@ -25,11 +25,18 @@ function ExpandableVideoPlayer_improve({
     }, 5000);
   };
 
+  
+
 
       const videoRef = useRef(null);
     
     const [isPlaying, setIsPlaying] = useState(false);
     const [videoReady, setVideoReady] = useState(false)
+
+    
+  useEffect(() => {
+    videoPlayingToggle(isPlaying);
+  }, [isPlaying])
 
     const handlePlay = () => {
 
