@@ -1,9 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Piano, Play } from "lucide-react";
-import { endVideoWatch, pinTimestamp, recordMuteToggle, startVideoWatch } from "../simpleTracker";
+import {
+  endVideoWatch,
+  pinTimestamp,
+  recordMuteToggle,
+  startVideoWatch,
+} from "../simpleTracker";
 import config from "../configuration.json";
-
 
 export default function ExpandableVideoPlayer({
   isExpanded,
@@ -14,38 +18,32 @@ export default function ExpandableVideoPlayer({
   const [isMuted, setIsMuted] = useState(true);
   const [hasStarted, setHasStarted] = useState(false);
   const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    console.log('video isplaying:', isPlaying)
-  }, [isPlaying])
-  
+    console.log("video isplaying:", isPlaying);
+  }, [isPlaying]);
 
   //User behavior tracking
   useEffect(() => {
-  if (isExpanded) {
-    startVideoWatch();
-  } else {
-    endVideoWatch();
-  }
-}, [isExpanded]);
-
+    if (isExpanded) {
+      startVideoWatch();
+    } else {
+      endVideoWatch();
+    }
+  }, [isExpanded]);
 
   const handleToggle = (e) => {
-    e.stopPropagation()
-    console.log('toggle clicked')
-      setIsExpanded(!isExpanded);
+    e.stopPropagation();
+    console.log("toggle clicked");
+    setIsExpanded(!isExpanded);
 
     if (!hasTyped) {
       setHasStarted(true);
       setIsMuted(false);
-    
-   
     } else {
     }
   };
-
- 
 
   const handleStart = (e) => {
     e.stopPropagation();
@@ -86,28 +84,32 @@ export default function ExpandableVideoPlayer({
           className={`w-full h-full ${
             isExpanded ? "object-contain" : "object-cover"
           }`}
-          style={isExpanded ? {
-            backgroundColor:  config.themeColor
-          }:{}}
+          style={
+            isExpanded
+              ? {
+                  backgroundColor: config.themeColor,
+                }
+              : {}
+          }
           loop
           // style={{
           //   opacity: isExpanded ? 1 : 0,
           // }}
-          
-          onPlaying={(e)=>{
-            console.log('video fully loaded')
-           setIsPlaying(true)
-            handleStart(e)
+
+          onPlaying={(e) => {
+            console.log("video fully loaded");
+            setIsPlaying(true);
+            handleStart(e);
           }}
-          onPause={(e)=>{
-           setIsPlaying(false)
+          onPause={(e) => {
+            setIsPlaying(false);
           }}
           muted={isMuted}
         />
 
-        { ((!hasStarted && isExpanded) || (!isPlaying && isExpanded)) && (
+        {((!hasStarted && isExpanded) || (!isPlaying && isExpanded)) && (
           <button
-             onClick={handleStart}
+            onClick={handleStart}
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-white text-black rounded-full p-4 shadow-lg"
           >
             <Play className="w-6 h-6" />
@@ -118,9 +120,9 @@ export default function ExpandableVideoPlayer({
           <button
             onClick={(e) => {
               e.stopPropagation();
-               const newMuted = !isMuted;
-                setIsMuted(newMuted);
-                recordMuteToggle(newMuted);
+              const newMuted = !isMuted;
+              setIsMuted(newMuted);
+              recordMuteToggle(newMuted);
             }}
             className="absolute top-4 right-4 z-20 bg-white rounded-full px-3 py-1 text-sm font-semibold"
           >
