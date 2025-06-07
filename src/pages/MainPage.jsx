@@ -31,16 +31,12 @@ export default function MainPage({
   startTyping,
 }) {
   const [typedGreeting, setTypedGreeting] = useState("");
-   const [showBtn, setShowBtn] = useState(false)
-  const [hasClicked, setHasClicked] = useState(false)
-
+  const [showBtn, setShowBtn] = useState(false);
+  const [hasClicked, setHasClicked] = useState(false);
 
   useEffect(() => {
     pinTimestamp("Main Page");
   }, []);
-
-  
-
 
   useEffect(() => {
     if (!startTyping) return;
@@ -59,7 +55,7 @@ export default function MainPage({
           return next;
         } else {
           clearInterval(interval);
-          setShowBtn(true)
+          setShowBtn(true);
 
           return prev;
         }
@@ -79,7 +75,6 @@ export default function MainPage({
   const initialIndex = location.state?.index || 0;
 
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
- 
 
   useEffect(() => {
     controls.start({
@@ -95,7 +90,7 @@ export default function MainPage({
   const handleDragEnd = (_, info) => {
     const width = containerRef.current?.offsetWidth || 0;
     const cardWidth = 0.9 * width;
-    const index = Math.round(-x.get() / cardWidth);
+    const index = Math.floor((-x.get() + cardWidth / 2) / cardWidth);
     const clampedIndex = Math.max(0, Math.min(postcards.length - 1, index));
     controls.start({
       x: -clampedIndex * (SCREEN_WIDTH * 0.9 + SCROLL_OFFSET),
@@ -138,25 +133,22 @@ export default function MainPage({
         </p>
         <p className=" text-lg  text-black mt-6 opacity-80">{typedGreeting}</p>
 
-            <h2 className="page-title relative w-full   justify-center mt-auto  px-2 py-1 font-semibold opacity-60 rounded-full flex flex-row items-center">
-            {
-              !hasClicked && (
-                <div style={{
-                  opacity: showBtn ? 1: 0,
-                  transition:"all 1s linear"
-                }} className="absolute   flex justify-center -top-3 w-full">
-               <div className="animate-shake flex items-center bg-white px-2 rounded-full">
+        <h2 className="page-title relative w-full   justify-center mt-auto  px-2 py-1 font-semibold opacity-60 rounded-full flex flex-row items-center">
+          {!hasClicked && (
+            <div
+              style={{
+                opacity: showBtn ? 1 : 0,
+                transition: "all 1s linear",
+              }}
+              className="absolute   flex justify-center -top-3 w-full"
+            >
+              <div className="animate-shake flex items-center bg-white px-2 rounded-full">
                 <ArrowDown size={14} className=" mr-1" />
-                {
-                `click postcards below`
-                }
-                 
-               </div>
+                {`click postcards below`}
               </div>
-              )
-            }
+            </div>
+          )}
           <div className="flex  justify-center mt-4 space-x-2">
-           
             {postcards.map((_, idx) => (
               <div
                 key={idx}
@@ -199,14 +191,14 @@ export default function MainPage({
                     layoutId={`card-${card.id}`}
                     className="postcard-card   flex flex-col  px-4 py-4 pb-24"
                     onClick={() => {
-                      openCard(card.id, index)
-                      setHasClicked(true)
+                      openCard(card.id, index);
+                      setHasClicked(true);
                     }}
                     whileTap={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     style={{ width: "90vw", flexShrink: 0 }}
                   >
-                    <PostCard  card={card} />
+                    <PostCard card={card} />
                   </motion.div>
                 ))}
               </motion.div>
